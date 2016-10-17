@@ -45,7 +45,7 @@
 /***/ function(module, exports) {
 
 	'use strict';
-	
+
 	console.log('hello');
 	//
 	// var request = new XMLHttpRequest();
@@ -60,19 +60,18 @@
 	// };
 	//
 	// request.send();
-	
-	
+
+
 	$.ajax({
 	  type: 'GET',
-	  dataType: 'JSONP',
-	  url: 'http://localhost:8080/clusters',
-	  xhrFields: {
-	    withCredentials: true
-	  },
+	  dataType: 'JSON',
+	  url: 'http://localhost:8080/admin/clusters',
 	  success: function success(data) {
+			console.log('success');
 	    console.log(data);
 	  },
 	  error: function error(e) {
+			console.log('error');
 	    console.log(e);
 	    console.log("this didn't work");
 	  }

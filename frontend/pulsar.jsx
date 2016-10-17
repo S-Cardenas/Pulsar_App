@@ -17,10 +17,7 @@ console.log('hello');
 $.ajax({
   type: 'GET',
   dataType: 'JSONP',
-  url: 'http://localhost:8080/clusters',
-  xhrFields: {
-            withCredentials: true
-        },
+  url: 'http://localhost:8080/admin/clusters',
   success: function(data) {
     console.log(data);
   },
