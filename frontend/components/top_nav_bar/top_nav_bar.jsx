@@ -5,9 +5,7 @@ class TopNavBar extends React.Component {
   render() {
     return (
       <div className="top-nav-bar group">
-        <h1 className='main-title'>
-          Pulsar App
-        </h1>
+        <img className="logo-image" src="./assets/images/pulsar.png" alt=""/>
         <ul className="nav-links">
           <li>
             Property
@@ -15,7 +13,9 @@ class TopNavBar extends React.Component {
           <li>
             Cluster
           </li>
+          <li>
             Namespace
+          </li>
           <li>
             Topic
           </li>

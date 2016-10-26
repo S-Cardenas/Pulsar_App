@@ -28333,11 +28333,7 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'top-nav-bar group' },
-	        _react2.default.createElement(
-	          'h1',
-	          { className: 'main-title' },
-	          'Pulsar App'
-	        ),
+	        _react2.default.createElement('img', { className: 'logo-image', src: './assets/images/pulsar.png', alt: '' }),
 	        _react2.default.createElement(
 	          'ul',
 	          { className: 'nav-links' },
@@ -28351,7 +28347,11 @@
 	            null,
 	            'Cluster'
 	          ),
-	          'Namespace',
+	          _react2.default.createElement(
+	            'li',
+	            null,
+	            'Namespace'
+	          ),
 	          _react2.default.createElement(
 	            'li',
 	            null,
@@ -28384,11 +28384,11 @@
 	
 	var _reactRedux = __webpack_require__(195);
 	
-	var _selector = __webpack_require__(264);
+	var _selector = __webpack_require__(263);
 	
 	var _clusters_actions = __webpack_require__(190);
 	
-	var _clusters_list = __webpack_require__(263);
+	var _clusters_list = __webpack_require__(264);
 	
 	var _clusters_list2 = _interopRequireDefault(_clusters_list);
 	
@@ -28412,6 +28412,21 @@
 
 /***/ },
 /* 263 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var allClusters = exports.allClusters = function allClusters(state) {
+	  return state ? Object.keys(state.clusters).map(function (key) {
+	    return state.clusters[key];
+	  }) : [];
+	};
+
+/***/ },
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28463,21 +28478,6 @@
 	}(_react2.default.Component);
 	
 	exports.default = ClustersList;
-
-/***/ },
-/* 264 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var allClusters = exports.allClusters = function allClusters(state) {
-	  return state ? Object.keys(state.clusters).map(function (key) {
-	    return state.clusters[key];
-	  }) : [];
-	};
 
 /***/ }
 /******/ ]);
