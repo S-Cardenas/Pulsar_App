@@ -22390,13 +22390,15 @@
 	var _clusters_actions = __webpack_require__(190);
 	
 	var ClustersReducer = function ClustersReducer() {
-	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 	  var action = arguments[1];
 	
-	  var newState = {};
+	  var newState = [];
 	  switch (action.type) {
 	    case _clusters_actions.RECEIVE_CLUSTERS:
-	      console.log(action.clusters);
+	      action.clusters.forEach(function (cluster) {
+	        return newState.push(cluster);
+	      });
 	      return newState;
 	    default:
 	      return state;
@@ -28420,16 +28422,14 @@
 	  value: true
 	});
 	var allClusters = exports.allClusters = function allClusters(state) {
-	  return state ? Object.keys(state.clusters).map(function (key) {
-	    return state.clusters[key];
-	  }) : [];
+	  return state ? state.clusters : [];
 	};
 
 /***/ },
 /* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -28459,17 +28459,73 @@
 	  }
 	
 	  _createClass(ClustersList, [{
-	    key: 'componentDidMount',
+	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      this.props.requestClusters();
 	    }
 	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
+	      var clusters = this.props.clusters;
+	
+	      var i = 0;
+	      var list = clusters.map(function (cluster) {
+	        i++;
+	        return _react2.default.createElement(
+	          "div",
+	          { className: "cluster-item group", key: i },
+	          _react2.default.createElement(
+	            "ul",
+	            null,
+	            _react2.default.createElement(
+	              "li",
+	              { className: "cluster-item-name" },
+	              cluster
+	            )
+	          )
+	        );
+	      });
+	
 	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'This is the clusters list.'
+	        "div",
+	        { className: "clusters-list" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "clusters-header" },
+	          _react2.default.createElement(
+	            "h1",
+	            null,
+	            "Clusters"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "clusters-columns group" },
+	          _react2.default.createElement(
+	            "ul",
+	            null,
+	            _react2.default.createElement(
+	              "li",
+	              null,
+	              "Active"
+	            ),
+	            _react2.default.createElement(
+	              "li",
+	              null,
+	              "Operations"
+	            ),
+	            _react2.default.createElement(
+	              "li",
+	              null,
+	              "Version"
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "clusters-content" },
+	          list
+	        )
 	      );
 	    }
 	  }]);
