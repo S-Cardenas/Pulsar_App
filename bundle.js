@@ -28384,6 +28384,10 @@
 	
 	var _reactRedux = __webpack_require__(195);
 	
+	var _selector = __webpack_require__(264);
+	
+	var _clusters_actions = __webpack_require__(190);
+	
 	var _clusters_list = __webpack_require__(263);
 	
 	var _clusters_list2 = _interopRequireDefault(_clusters_list);
@@ -28391,11 +28395,17 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(state) {
-	  return {};
+	  return {
+	    clusters: (0, _selector.allClusters)(state)
+	  };
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-	  return {};
+	  return {
+	    requestClusters: function requestClusters() {
+	      return dispatch((0, _clusters_actions.requestClusters)());
+	    }
+	  };
 	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_clusters_list2.default);
@@ -28434,6 +28444,11 @@
 	  }
 	
 	  _createClass(ClustersList, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.requestClusters();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -28448,6 +28463,21 @@
 	}(_react2.default.Component);
 	
 	exports.default = ClustersList;
+
+/***/ },
+/* 264 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var allClusters = exports.allClusters = function allClusters(state) {
+	  return state ? Object.keys(state.clusters).map(function (key) {
+	    return state.clusters[key];
+	  }) : [];
+	};
 
 /***/ }
 /******/ ]);
