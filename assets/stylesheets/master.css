@@ -65,6 +65,7 @@ img {
 }
 
 .logo-image {
+  padding-left: 10px;
   width: 187px;
   height: 36px;
   float: left;
@@ -124,7 +125,7 @@ img {
 .cluster-item {
   margin-top: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #DCDCDC;
 }
 
 .cluster-item-name {
@@ -148,7 +149,7 @@ img {
 }
 
 .cluster-detail-element {
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #DCDCDC;
   padding-top: 3px;
   padding-bottom: 3px;
 }
