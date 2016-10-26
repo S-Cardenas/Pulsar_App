@@ -1,26 +1,39 @@
 import React from 'react';
-import { hashHistory } from 'react-router';
+import { hashHistory, Link } from 'react-router';
 
 class TopNavBar extends React.Component {
   render() {
     return (
       <div className="top-nav-bar group">
-        <img className="logo-image" src="./assets/images/pulsar.png" alt=""/>
+        <Link to={"/"}>
+          <img className="logo-image" src="./assets/images/pulsar.png" alt=""/>
+        </Link>
+
         <ul className="nav-links">
           <li>
-            Property
+            <Link to={"/property"}>
+              Property
+            </Link>
           </li>
           <li>
-            Cluster
+            <Link to={"/clusters"}>
+              Cluster
+            </Link>
           </li>
           <li>
-            Namespace
+            <Link to={"/namespace"}>
+              Namespace
+            </Link>
           </li>
           <li>
-            Topic
+            <Link to={"/topic"}>
+              Topic
+            </Link>
           </li>
           <li>
-            Broker
+            <Link to={"/broker"}>
+              Broker
+            </Link>
           </li>
         </ul>
       </div>

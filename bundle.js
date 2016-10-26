@@ -28335,34 +28335,58 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'top-nav-bar group' },
-	        _react2.default.createElement('img', { className: 'logo-image', src: './assets/images/pulsar.png', alt: '' }),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: "/" },
+	          _react2.default.createElement('img', { className: 'logo-image', src: './assets/images/pulsar.png', alt: '' })
+	        ),
 	        _react2.default.createElement(
 	          'ul',
 	          { className: 'nav-links' },
 	          _react2.default.createElement(
 	            'li',
 	            null,
-	            'Property'
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: "/property" },
+	              'Property'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'li',
 	            null,
-	            'Cluster'
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: "/clusters" },
+	              'Cluster'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'li',
 	            null,
-	            'Namespace'
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: "/namespace" },
+	              'Namespace'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'li',
 	            null,
-	            'Topic'
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: "/topic" },
+	              'Topic'
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'li',
 	            null,
-	            'Broker'
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: "/broker" },
+	              'Broker'
+	            )
 	          )
 	        )
 	      );
