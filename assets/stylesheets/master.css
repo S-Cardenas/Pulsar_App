@@ -152,14 +152,14 @@ img {
 }
 
 .cluster-detail-element li:first-child {
-  background: orange;
+  margin-left: 10px;
   min-width: 150px;
+  font-weight: bold;
 }
 
 .cluster-detail-element li {
   margin-right: 75px;
   margin-top: 5px;
   margin-bottom: 5px;
-  background: yellow;
   float: left;
 }

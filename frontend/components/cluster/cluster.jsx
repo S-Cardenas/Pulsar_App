@@ -8,7 +8,6 @@ class Cluster extends React.Component {
 
   render() {
     const { cluster } = this.props;
-    console.log(cluster);
     return(
       <div className="cluster-detail">
         <div className="clusters-header">

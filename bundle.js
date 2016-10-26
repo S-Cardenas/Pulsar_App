@@ -28692,7 +28692,6 @@
 	    value: function render() {
 	      var cluster = this.props.cluster;
 	
-	      console.log(cluster);
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "cluster-detail" },
