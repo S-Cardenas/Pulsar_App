@@ -22369,10 +22369,15 @@
 	
 	var _clusters_reducer2 = _interopRequireDefault(_clusters_reducer);
 	
+	var _cluster_reducer = __webpack_require__(267);
+	
+	var _cluster_reducer2 = _interopRequireDefault(_cluster_reducer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var RootReducer = (0, _redux.combineReducers)({
-	  clusters: _clusters_reducer2.default
+	  clusters: _clusters_reducer2.default,
+	  cluster: _cluster_reducer2.default
 	});
 	
 	exports.default = RootReducer;
@@ -22418,6 +22423,8 @@
 	});
 	var RECEIVE_CLUSTERS = exports.RECEIVE_CLUSTERS = 'RECEIVE_CLUSTERS';
 	var REQUEST_CLUSTERS = exports.REQUEST_CLUSTERS = 'REQUEST_CLUSTERS';
+	var RECEIVE_CLUSTER = exports.RECEIVE_CLUSTER = 'RECEIVE_CLUSTER';
+	var REQUEST_CLUSTER = exports.REQUEST_CLUSTER = 'REQUEST_CLUSTER';
 	
 	var receiveClusters = exports.receiveClusters = function receiveClusters(clusters) {
 	  return {
@@ -22426,9 +22433,23 @@
 	  };
 	};
 	
+	var receiveCluster = exports.receiveCluster = function receiveCluster(cluster) {
+	  return {
+	    type: RECEIVE_CLUSTER,
+	    cluster: cluster
+	  };
+	};
+	
 	var requestClusters = exports.requestClusters = function requestClusters() {
 	  return {
 	    type: REQUEST_CLUSTERS
+	  };
+	};
+	
+	var requestCluster = exports.requestCluster = function requestCluster(data) {
+	  return {
+	    type: REQUEST_CLUSTER,
+	    data: data
 	  };
 	};
 
@@ -22476,6 +22497,9 @@
 	      var clustersSuccess = function clustersSuccess(data) {
 	        return dispatch((0, _clusters_actions.receiveClusters)(data));
 	      };
+	      var clusterSuccess = function clusterSuccess(data) {
+	        return dispatch((0, _clusters_actions.receiveCluster)(data));
+	      };
 	      var error = function error(e) {
 	        return console.log(e);
 	      };
@@ -22483,6 +22507,9 @@
 	      switch (action.type) {
 	        case _clusters_actions.REQUEST_CLUSTERS:
 	          (0, _api_util.fetchClusters)(clustersSuccess, error);
+	          break;
+	        case _clusters_actions.REQUEST_CLUSTER:
+	          (0, _api_util.fetchCluster)(action.data, clusterSuccess, error);
 	          break;
 	        default:
 	          next(action);
@@ -22504,6 +22531,16 @@
 	  $.ajax({
 	    type: 'GET',
 	    url: 'http://localhost:8080/admin/clusters',
+	    success: success,
+	    error: error
+	  });
+	};
+	
+	var fetchCluster = exports.fetchCluster = function fetchCluster(data, success, error) {
+	  $.ajax({
+	    method: 'GET',
+	    url: 'http://localhost:8080/admin/clusters/' + data,
+	    dataType: 'JSON',
 	    success: success,
 	    error: error
 	  });
@@ -22535,6 +22572,10 @@
 	
 	var _clusters_list_container2 = _interopRequireDefault(_clusters_list_container);
 	
+	var _cluster_container = __webpack_require__(265);
+	
+	var _cluster_container2 = _interopRequireDefault(_cluster_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Root = function Root(_ref) {
@@ -22548,7 +22589,8 @@
 	      _react2.default.createElement(
 	        _reactRouter.Route,
 	        { path: '/', component: _app2.default },
-	        _react2.default.createElement(_reactRouter.Route, { path: '/clusters', component: _clusters_list_container2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: '/clusters', component: _clusters_list_container2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/clusters/:name', component: _cluster_container2.default })
 	      )
 	    )
 	  );
@@ -28358,7 +28400,7 @@
 	            _react2.default.createElement(
 	              _reactRouter.Link,
 	              { to: "/clusters" },
-	              'Cluster'
+	              'Clusters'
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -28367,7 +28409,7 @@
 	            _react2.default.createElement(
 	              _reactRouter.Link,
 	              { to: "/namespace" },
-	              'Namespace'
+	              'Namespaces'
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -28376,7 +28418,7 @@
 	            _react2.default.createElement(
 	              _reactRouter.Link,
 	              { to: "/topic" },
-	              'Topic'
+	              'Topics'
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -28385,7 +28427,7 @@
 	            _react2.default.createElement(
 	              _reactRouter.Link,
 	              { to: "/broker" },
-	              'Broker'
+	              'Brokers'
 	            )
 	          )
 	        )
@@ -28448,12 +28490,16 @@
 	var allClusters = exports.allClusters = function allClusters(state) {
 	  return state ? state.clusters : [];
 	};
+	
+	var currentCluster = exports.currentCluster = function currentCluster(state) {
+	  return state ? state.cluster : {};
+	};
 
 /***/ },
 /* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -28464,6 +28510,8 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(204);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28483,12 +28531,12 @@
 	  }
 	
 	  _createClass(ClustersList, [{
-	    key: "componentDidMount",
+	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.props.requestClusters();
 	    }
 	  }, {
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      var clusters = this.props.clusters;
 	
@@ -28496,58 +28544,62 @@
 	      var list = clusters.map(function (cluster) {
 	        i++;
 	        return _react2.default.createElement(
-	          "div",
-	          { className: "cluster-item group", key: i },
+	          'div',
+	          { className: 'cluster-item group', key: i },
 	          _react2.default.createElement(
-	            "ul",
+	            'ul',
 	            null,
 	            _react2.default.createElement(
-	              "li",
-	              { className: "cluster-item-name" },
-	              cluster
+	              'li',
+	              { className: 'cluster-item-name' },
+	              _react2.default.createElement(
+	                _reactRouter.Link,
+	                { to: "/clusters/" + cluster },
+	                cluster
+	              )
 	            )
 	          )
 	        );
 	      });
 	
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "clusters-list" },
+	        'div',
+	        { className: 'clusters-list' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "clusters-header" },
+	          'div',
+	          { className: 'clusters-header' },
 	          _react2.default.createElement(
-	            "h1",
+	            'h1',
 	            null,
-	            "Clusters"
+	            'Clusters'
 	          )
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "clusters-columns group" },
+	          'div',
+	          { className: 'clusters-columns group' },
 	          _react2.default.createElement(
-	            "ul",
+	            'ul',
 	            null,
 	            _react2.default.createElement(
-	              "li",
+	              'li',
 	              null,
-	              "Active"
+	              'Active'
 	            ),
 	            _react2.default.createElement(
-	              "li",
+	              'li',
 	              null,
-	              "Operations"
+	              'Operations'
 	            ),
 	            _react2.default.createElement(
-	              "li",
+	              'li',
 	              null,
-	              "Version"
+	              'Version'
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "clusters-content" },
+	          'div',
+	          { className: 'clusters-content' },
 	          list
 	        )
 	      );
@@ -28558,6 +28610,129 @@
 	}(_react2.default.Component);
 	
 	exports.default = ClustersList;
+
+/***/ },
+/* 265 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(195);
+	
+	var _clusters_actions = __webpack_require__(190);
+	
+	var _selector = __webpack_require__(263);
+	
+	var _cluster = __webpack_require__(266);
+	
+	var _cluster2 = _interopRequireDefault(_cluster);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    cluster: (0, _selector.currentCluster)(state)
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    requestCluster: function requestCluster(data) {
+	      return dispatch((0, _clusters_actions.requestCluster)(data));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_cluster2.default);
+
+/***/ },
+/* 266 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Cluster = function (_React$Component) {
+	  _inherits(Cluster, _React$Component);
+	
+	  function Cluster() {
+	    _classCallCheck(this, Cluster);
+	
+	    return _possibleConstructorReturn(this, (Cluster.__proto__ || Object.getPrototypeOf(Cluster)).apply(this, arguments));
+	  }
+	
+	  _createClass(Cluster, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.props.requestCluster(this.props.params.name);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var cluster = this.props.cluster;
+	
+	      console.log(cluster);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'Cluster Component'
+	      );
+	    }
+	  }]);
+	
+	  return Cluster;
+	}(_react2.default.Component);
+	
+	exports.default = Cluster;
+
+/***/ },
+/* 267 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _clusters_actions = __webpack_require__(190);
+	
+	var ClusterReducer = function ClusterReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	  var action = arguments[1];
+	
+	  var newState = {};
+	  switch (action.type) {
+	    case _clusters_actions.RECEIVE_CLUSTER:
+	      newState = action.cluster;
+	      return newState;
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = ClusterReducer;
 
 /***/ }
 /******/ ]);

@@ -17,22 +17,22 @@ class TopNavBar extends React.Component {
           </li>
           <li>
             <Link to={"/clusters"}>
-              Cluster
+              Clusters
             </Link>
           </li>
           <li>
             <Link to={"/namespace"}>
-              Namespace
+              Namespaces
             </Link>
           </li>
           <li>
             <Link to={"/topic"}>
-              Topic
+              Topics
             </Link>
           </li>
           <li>
             <Link to={"/broker"}>
-              Broker
+              Brokers
             </Link>
           </li>
         </ul>

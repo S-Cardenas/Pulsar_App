@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 class ClustersList extends React.Component {
 
@@ -14,7 +15,11 @@ class ClustersList extends React.Component {
       return(
         <div className="cluster-item group" key={i}>
           <ul>
-            <li className="cluster-item-name">{cluster}</li>
+            <li className="cluster-item-name">
+              <Link to={"/clusters/" + cluster}>
+                {cluster}
+              </Link>
+            </li>
           </ul>
         </div>
       );
