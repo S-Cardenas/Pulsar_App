@@ -1,28 +1,12 @@
-console.log('hello');
-//
-// var request = new XMLHttpRequest();
-// request.open('GET', 'http://localhost:8080/clusters', true);
-// request.onload = function() {
-//   console.log(request.status);
-//   console.log(request.responseText);
-// };
-//
-// request.onerror = function() {
-//   console.log('this did not fracking work');
-// };
-//
-// request.send();
+//React
+import React from 'react';
+import ReactDOM from 'react-dom';
 
+//Store and Root Component
+import configureStore from './store/store';
+import Root from './components/root';
 
-$.ajax({
-  type: 'GET',
-  dataType: 'JSONP',
-  url: 'http://localhost:8080/admin/clusters',
-  success: function(data) {
-    console.log(data);
-  },
-  error: function(e) {
-    console.log(e);
-    console.log("this didn't work");
-  }
+document.addEventListener("DOMContentLoaded", function() {
+  const store = configureStore();
+  ReactDOM.render(<Root store={store}/>, document.getElementById('root'));
 });
