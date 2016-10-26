@@ -28653,7 +28653,7 @@
 /* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -28683,20 +28683,78 @@
 	  }
 	
 	  _createClass(Cluster, [{
-	    key: 'componentDidMount',
+	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      this.props.requestCluster(this.props.params.name);
 	    }
 	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      var cluster = this.props.cluster;
 	
 	      console.log(cluster);
 	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'Cluster Component'
+	        "div",
+	        { className: "cluster-detail" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "clusters-header" },
+	          _react2.default.createElement(
+	            "h1",
+	            null,
+	            "Cluster Summary"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "clusters-details-list group" },
+	          _react2.default.createElement(
+	            "ul",
+	            null,
+	            _react2.default.createElement(
+	              "ul",
+	              { className: "cluster-detail-element group" },
+	              _react2.default.createElement(
+	                "li",
+	                null,
+	                "Name"
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                null,
+	                this.props.params.name
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "ul",
+	              { className: "cluster-detail-element group" },
+	              _react2.default.createElement(
+	                "li",
+	                null,
+	                "ServiceURL:"
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                null,
+	                cluster.serviceUrl
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "ul",
+	              { className: "cluster-detail-element group" },
+	              _react2.default.createElement(
+	                "li",
+	                null,
+	                "ServiceURLTLS:"
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                null,
+	                cluster.serviceUrlTls
+	              )
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);
