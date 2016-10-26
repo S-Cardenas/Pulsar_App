@@ -149,6 +149,8 @@ img {
 
 .cluster-detail-element {
   border-bottom: 1px solid grey;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 .cluster-detail-element li:first-child {
