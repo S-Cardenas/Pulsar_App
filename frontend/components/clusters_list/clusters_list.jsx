@@ -21,11 +21,12 @@ class ClustersList extends React.Component {
   }
 
   handleSubmit() {
+    var name = this.state.clusterName;
     return(e) => {
       e.preventDefault();
       this.props.createCluster(this.state, function(cluster) {
         hashHistory.push({
-          pathname: '/clusters/' + cluster[0],
+          pathname: '/clusters/' + name,
           query: {},
           state: {}
         });
@@ -70,7 +71,7 @@ class ClustersList extends React.Component {
 
         <div className="create-cluster-container">
           <h1>Create New Cluster</h1>
-          <form className="create-cluster-form" onSubmit={this.handleSubmit}>
+          <form className="create-cluster-form" onSubmit={this.handleSubmit()}>
             <div className="create-form-row group">
               <label>Cluster Name</label>
               <input

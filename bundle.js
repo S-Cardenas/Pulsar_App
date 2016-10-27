@@ -22539,7 +22539,8 @@
 	      };
 	      var createSuccess = function createSuccess(data) {
 	        action.callback(data);
-	        return dispatch();
+	        console.log(data);
+	        return dispatch((0, _clusters_actions.receiveCluster)(data));
 	      };
 	      var error = function error(e) {
 	        return console.log(e);
@@ -28615,11 +28616,12 @@
 	    value: function handleSubmit() {
 	      var _this3 = this;
 	
+	      var name = this.state.clusterName;
 	      return function (e) {
 	        e.preventDefault();
 	        _this3.props.createCluster(_this3.state, function (cluster) {
 	          _reactRouter.hashHistory.push({
-	            pathname: '/clusters/' + cluster[0],
+	            pathname: '/clusters/' + name,
 	            query: {},
 	            state: {}
 	          });
@@ -28703,7 +28705,7 @@
 	          ),
 	          _react2.default.createElement(
 	            'form',
-	            { className: 'create-cluster-form', onSubmit: this.handleSubmit },
+	            { className: 'create-cluster-form', onSubmit: this.handleSubmit() },
 	            _react2.default.createElement(
 	              'div',
 	              { className: 'create-form-row group' },

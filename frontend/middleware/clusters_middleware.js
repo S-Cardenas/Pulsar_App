@@ -12,7 +12,8 @@ export default ({ getState, dispatch }) => next => action => {
   const clustersSuccess = (data) => dispatch(receiveClusters(data));
   const clusterSuccess = (data) => dispatch(receiveCluster(data));
   const createSuccess = (data) => { action.callback(data);
-                                    return dispatch();};
+                                    console.log(data);
+                                    return dispatch(receiveCluster(data));};
   const error = (e) => console.log(e);
 
   switch( action.type ) {

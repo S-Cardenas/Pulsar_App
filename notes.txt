@@ -1,0 +1,5 @@
+Suggestions:
+1. GET /admin/clusters/{cluster} should return a better data structure. Include cluster name,id,etc.
+
+Questions:
+1. params for PUT /admin/clusters/{cluster}   ???
