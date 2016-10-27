@@ -9,7 +9,7 @@ class Cluster extends React.Component {
   render() {
     const { cluster } = this.props;
     return(
-      <div className="cluster-detail">
+      <div className="cluster-detail animated bounceInLeft">
         <div className="clusters-header">
           <h1>
             Cluster Summary

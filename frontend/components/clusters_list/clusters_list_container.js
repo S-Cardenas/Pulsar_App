@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { allClusters } from '../../reducers/selector.js';
-import { requestClusters } from '../../actions/clusters_actions';
+import { requestClusters,
+         createCluster} from '../../actions/clusters_actions';
 import ClusterList from './clusters_list';
 
 
@@ -9,7 +10,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  requestClusters: () => dispatch(requestClusters())
+  requestClusters: () => dispatch(requestClusters()),
+  createCluster: (data, callback) => dispatch(createCluster(data, callback))
 });
 
 export default connect(

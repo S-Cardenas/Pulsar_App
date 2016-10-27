@@ -1,10 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 
 class ClustersList extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      clusterName: "",
+      serviceUrl: "",
+      serviceUrlTls: ""
+    };
+  }
+
   componentDidMount() {
     this.props.requestClusters();
+  }
+
+  update(property) {
+    return e => this.setState({[property] : e.target.value});
+  }
+
+  handleSubmit() {
+    return(e) => {
+      e.preventDefault();
+      this.props.createCluster(this.state, function(cluster) {
+        hashHistory.push({
+          pathname: '/clusters/' + cluster[0],
+          query: {},
+          state: {}
+        });
+      });
+    };
   }
 
   render() {
@@ -26,7 +52,7 @@ class ClustersList extends React.Component {
     });
 
     return(
-      <div className="clusters-list">
+      <div className="clusters-list animated bounceInLeft">
         <div className="clusters-header">
           <h1>Clusters</h1>
         </div>
@@ -37,9 +63,61 @@ class ClustersList extends React.Component {
             <li>Version</li>
           </ul>
         </div>
+
         <div className="clusters-content">
           {list}
         </div>
+
+        <div className="create-cluster-container">
+          <h1>Create New Cluster</h1>
+          <form className="create-cluster-form" onSubmit={this.handleSubmit}>
+            <div className="create-form-row group">
+              <label>Cluster Name</label>
+              <input
+                className="input-text"
+                ref="cluster name"
+                value={this.state.clusterName}
+                placeholder="Insert New Cluster Name"
+                onChange={this.update('clusterName')}/>
+            </div>
+
+
+            <br/>
+
+
+            <div className="create-form-row group">
+              <label>Service URL</label>
+              <input
+                className="input-text"
+                ref="service url"
+                value={this.state.serviceUrl}
+                placeholder="Insert Service URL"
+                onChange={this.update('serviceUrl')}/>
+            </div>
+
+
+            <br/>
+
+            <div className="create-form-row group">
+              <label>Service URLTls</label>
+              <input
+                className="input-text"
+                ref="service url"
+                value={this.state.serviceUrlTls}
+                placeholder="Insert Service UrlTls"
+                onChange={this.update('serviceUrlTls')}/>
+            </div>
+
+
+            <br/>
+
+            <button type="submit"
+                    className="create-cluster-button">
+                    Create Cluster
+            </button>
+          </form>
+        </div>
+
       </div>
     );
   }
