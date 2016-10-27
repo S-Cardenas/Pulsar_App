@@ -66,6 +66,18 @@
 	
 	//Store and Root Component
 	//React
+	$.ajax({
+	  type: 'GET',
+	  dataType: 'JSON',
+	  url: 'http://localhost:8080/admin/properties/',
+	  success: function success(property) {
+	    console.log(property);
+	  },
+	  error: function error() {
+	    console.log("Didn't find the property.");
+	  }
+	});
+	
 	document.addEventListener("DOMContentLoaded", function () {
 	  var store = (0, _store2.default)();
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), document.getElementById('root'));
@@ -22631,6 +22643,10 @@
 	
 	var _cluster_container2 = _interopRequireDefault(_cluster_container);
 	
+	var _properties_list_container = __webpack_require__(268);
+	
+	var _properties_list_container2 = _interopRequireDefault(_properties_list_container);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Root = function Root(_ref) {
@@ -22645,7 +22661,8 @@
 	        _reactRouter.Route,
 	        { path: '/', component: _app2.default },
 	        _react2.default.createElement(_reactRouter.Route, { path: '/clusters', component: _clusters_list_container2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/clusters/:name', component: _cluster_container2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: '/clusters/:name', component: _cluster_container2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/property', component: _properties_list_container2.default })
 	      )
 	    )
 	  );
@@ -28552,6 +28569,10 @@
 	var currentCluster = exports.currentCluster = function currentCluster(state) {
 	  return state ? state.cluster : {};
 	};
+	
+	var allProperties = exports.allProperties = function allProperties(state) {
+	  return state ? state.properties : {};
+	};
 
 /***/ },
 /* 265 */
@@ -28922,6 +28943,120 @@
 	}(_react2.default.Component);
 	
 	exports.default = Cluster;
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(196);
+	
+	var _selector = __webpack_require__(264);
+	
+	var _properties_actions = __webpack_require__(270);
+	
+	var _property_list = __webpack_require__(269);
+	
+	var _property_list2 = _interopRequireDefault(_property_list);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    properties: (0, _selector.allProperties)(state)
+	  };
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    requestProperties: function requestProperties() {
+	      return dispatch((0, _properties_actions.requestProperties)());
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_property_list2.default);
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(205);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var PropertyList = function (_React$Component) {
+	  _inherits(PropertyList, _React$Component);
+	
+	  function PropertyList() {
+	    _classCallCheck(this, PropertyList);
+	
+	    return _possibleConstructorReturn(this, (PropertyList.__proto__ || Object.getPrototypeOf(PropertyList)).apply(this, arguments));
+	  }
+	
+	  _createClass(PropertyList, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        'these are the properties biatch'
+	      );
+	    }
+	  }]);
+	
+	  return PropertyList;
+	}(_react2.default.Component);
+	
+	exports.default = PropertyList;
+
+/***/ },
+/* 270 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var REQUEST_PROPERTIES = exports.REQUEST_PROPERTIES = 'REQUEST_PROPERTIES';
+	var RECEIVE_PROPERTIES = exports.RECEIVE_PROPERTIES = 'RECEIVE_PROPERTIES';
+	
+	var requestProperties = exports.requestProperties = function requestProperties() {
+	  return {
+	    type: REQUEST_PROPERTIES
+	  };
+	};
+	
+	var receiveProperties = exports.receiveProperties = function receiveProperties(properties) {
+	  return {
+	    type: RECEIVE_PROPERTIES,
+	    properties: properties
+	  };
+	};
 
 /***/ }
 /******/ ]);

@@ -5,3 +5,7 @@ export const allClusters = (state) => {
 export const currentCluster = (state) => {
   return state ? state.cluster : {};
 };
+
+export const allProperties = (state) => {
+  return state ? state.properties : {};
+};
