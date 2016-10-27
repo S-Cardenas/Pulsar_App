@@ -78,7 +78,7 @@ class ClustersList extends React.Component {
                 className="input-text"
                 ref="cluster name"
                 value={this.state.clusterName}
-                placeholder="Insert New Cluster Name"
+                placeholder="US West 1"
                 onChange={this.update('clusterName')}/>
             </div>
 
@@ -92,7 +92,7 @@ class ClustersList extends React.Component {
                 className="input-text"
                 ref="service url"
                 value={this.state.serviceUrl}
-                placeholder="Insert Service URL"
+                placeholder="http://localhost:5000"
                 onChange={this.update('serviceUrl')}/>
             </div>
 
@@ -105,7 +105,7 @@ class ClustersList extends React.Component {
                 className="input-text"
                 ref="service url"
                 value={this.state.serviceUrlTls}
-                placeholder="Insert Service UrlTls"
+                placeholder="http://serviceUrlTls"
                 onChange={this.update('serviceUrlTls')}/>
             </div>
 

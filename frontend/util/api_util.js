@@ -26,3 +26,12 @@ export const createCluster = (data, success, error) => {
     error
   });
 };
+
+export const fetchProperties = (success, error) => {
+  $.ajax({
+    type: 'GET',
+    url: 'http://localhost:8080/admin/properties',
+    success,
+    error
+  });
+};

@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import ClustersReducer from './clusters_reducer';
 import ClusterReducer from './cluster_reducer';
+import PropertiesReducer from './properties_reducer';
 
 const RootReducer = combineReducers({
   clusters: ClustersReducer,
-  cluster: ClusterReducer
+  cluster: ClusterReducer,
+  properties: PropertiesReducer
 });
 
 export default RootReducer;

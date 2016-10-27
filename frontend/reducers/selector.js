@@ -7,5 +7,5 @@ export const currentCluster = (state) => {
 };
 
 export const allProperties = (state) => {
-  return state ? state.properties : {};
+  return state ? state.properties : [];
 };
