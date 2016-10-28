@@ -29455,7 +29455,7 @@
 /* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29485,19 +29485,100 @@
 	  }
 	
 	  _createClass(Property, [{
-	    key: 'componentDidMount',
+	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      this.props.requestProperty(this.props.params.name);
 	    }
 	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      var property = this.props.property;
 	
+	      var i = 0,
+	          j = 0;
+	      if (property.adminRoles) {
+	        var adminRoles = property.adminRoles.map(function (adminRole) {
+	          i++;
+	          return _react2.default.createElement(
+	            "li",
+	            { className: "admin-role", key: i },
+	            adminRole
+	          );
+	        });
+	      }
+	
+	      if (property.allowedClusters) {
+	        j++;
+	        var allowedClusters = property.allowedClusters.map(function (cluster) {
+	          return _react2.default.createElement(
+	            "li",
+	            { className: "admin-role", key: j },
+	            cluster
+	          );
+	        });
+	      }
 	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        'blakfdl;ajnklfas'
+	        "div",
+	        { className: "property-detail animated bounceInRight" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "property-header" },
+	          _react2.default.createElement(
+	            "h1",
+	            null,
+	            "Property Summary"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "property-details-list group" },
+	          _react2.default.createElement(
+	            "ul",
+	            null,
+	            _react2.default.createElement(
+	              "ul",
+	              { className: "property-detail-element group" },
+	              _react2.default.createElement(
+	                "li",
+	                null,
+	                "Name"
+	              ),
+	              _react2.default.createElement(
+	                "li",
+	                null,
+	                this.props.params.name
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "ul",
+	              { className: "property-detail-element group" },
+	              _react2.default.createElement(
+	                "li",
+	                null,
+	                "Admin Roles:"
+	              ),
+	              _react2.default.createElement(
+	                "ul",
+	                null,
+	                adminRoles
+	              )
+	            ),
+	            _react2.default.createElement(
+	              "ul",
+	              { className: "property-detail-element group" },
+	              _react2.default.createElement(
+	                "li",
+	                null,
+	                "Active Clusters:"
+	              ),
+	              _react2.default.createElement(
+	                "ul",
+	                null,
+	                allowedClusters
+	              )
+	            )
+	          )
+	        )
 	      );
 	    }
 	  }]);

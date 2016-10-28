@@ -314,3 +314,69 @@ img {
   color: #1E90FF;
   cursor: pointer;
 }
+
+.property-detail {
+  float: left;
+  margin-top: 20px;
+  width: 40%;
+  min-height: 250px;
+  border: 3px solid #696969;
+  margin-left: auto;
+  margin-right: 20px;
+  border-radius: 5px;
+  background: white;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.property-header {
+  font-size: 24px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background: #D3D3D3;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.property-header h1 {
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.property-columns {
+  border-bottom: 2px solid black;
+}
+
+.property-columns > ul > li {
+  margin-left: 15px;
+  margin-right: 50px;
+  float: left;
+  font-size: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.property-detail-element {
+  border-bottom: 1px solid #DCDCDC;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.property-detail-element > li:first-child {
+  margin-left: 10px;
+  min-width: 150px;
+  font-weight: bold;
+}
+
+.property-detail-element li {
+  margin-right: 75px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  float: left;
+}
+
+.property-detail-element ul {
+  width: 50px;
+  float: left;
+}
