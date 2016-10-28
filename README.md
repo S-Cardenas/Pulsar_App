@@ -4,6 +4,7 @@ A web app for managing <a href='https://github.com/yahoo/pulsar'>Yahoo's Pulsar<
 
 ##**Demo Instructions**
 * cd into the root folder.
+* Run  `npm install`
 * Run  `webpack`
 * cd into Pulsar_app/pulsar-1.14 and run `bin/pulsar standalone` to start a local server on local host 8080.
 * cd in the root folder and run another local host (I recomment `http-server -p 3000`)
