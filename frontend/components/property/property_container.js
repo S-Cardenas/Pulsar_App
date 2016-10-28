@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
-// import { createProperty } from '../../actions/property_actions';
+import { requestProperty } from '../../actions/properties_actions';
+import { currentProperty } from '../../reducers/selector';
 import Property from './property';
 
 const mapStateToProps = (state) => ({
+  property: currentProperty(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  
+  requestProperty: (data) => dispatch(requestProperty(data))
 });
 
 export default connect(

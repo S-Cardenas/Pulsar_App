@@ -36,6 +36,16 @@ export const fetchProperties = (success, error) => {
   });
 };
 
+export const fetchProperty = (data, success, error) => {
+  $.ajax({
+    method: 'GET',
+    url: 'http://localhost:8080/admin/properties/' + data,
+    dataType: 'JSON',
+    success,
+    error
+  });
+};
+
 export const createProperty = (data, success, error) => {
   $.ajax({
     method: 'PUT',
