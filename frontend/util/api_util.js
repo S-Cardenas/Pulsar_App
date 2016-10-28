@@ -55,3 +55,13 @@ export const createProperty = (data, success, error) => {
     error
   });
 };
+
+export const deleteProperty = (data, success, error) => {
+  $.ajax({
+    method: 'DELETE',
+    url: 'http://localhost:8080/admin/properties/' + data,
+    dataType: JSON,
+    success,
+    error
+  });
+};

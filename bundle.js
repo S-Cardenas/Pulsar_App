@@ -22544,6 +22544,7 @@
 	var REQUEST_PROPERTY = exports.REQUEST_PROPERTY = 'REQUEST_PROPERTY';
 	var CREATE_PROPERTY = exports.CREATE_PROPERTY = 'CREATE_PROPERTY';
 	var RECEIVE_PROPERTY = exports.RECEIVE_PROPERTY = 'RECEIVE_PROPERTY';
+	var DELETE_PROPERTY = exports.DELETE_PROPERTY = 'DELETE_PROPERTY';
 	
 	var requestProperties = exports.requestProperties = function requestProperties() {
 	  return {
@@ -22578,6 +22579,13 @@
 	    type: CREATE_PROPERTY,
 	    data: data,
 	    callback: callback
+	  };
+	};
+	
+	var deleteProperty = exports.deleteProperty = function deleteProperty(data) {
+	  return {
+	    type: DELETE_PROPERTY,
+	    data: data
 	  };
 	};
 
@@ -22751,6 +22759,16 @@
 	    error: error
 	  });
 	};
+	
+	var deleteProperty = exports.deleteProperty = function deleteProperty(data, success, error) {
+	  $.ajax({
+	    method: 'DELETE',
+	    url: 'http://localhost:8080/admin/properties/' + data,
+	    dataType: JSON,
+	    success: success,
+	    error: error
+	  });
+	};
 
 /***/ },
 /* 198 */
@@ -22779,10 +22797,13 @@
 	      };
 	      var createSuccess = function createSuccess(data) {
 	        action.callback(data);
-	        return dispatch((0, _properties_actions.receiveProperty)(data));
+	        return dispatch((0, _properties_actions.requestProperties)());
 	      };
 	      var error = function error(e) {
 	        return console.log(e);
+	      };
+	      var success = function success(e) {
+	        return dispatch((0, _properties_actions.requestProperties)());
 	      };
 	
 	      switch (action.type) {
@@ -22794,6 +22815,9 @@
 	          break;
 	        case _properties_actions.CREATE_PROPERTY:
 	          (0, _api_util.createProperty)(action.data, createSuccess, error);
+	          break;
+	        case _properties_actions.DELETE_PROPERTY:
+	          (0, _api_util.deleteProperty)(action.data, success, error);
 	          break;
 	        default:
 	          next(action);
@@ -29445,6 +29469,9 @@
 	  return {
 	    requestProperty: function requestProperty(data) {
 	      return dispatch((0, _properties_actions.requestProperty)(data));
+	    },
+	    deleteProperty: function deleteProperty(data) {
+	      return dispatch((0, _properties_actions.deleteProperty)(data));
 	    }
 	  };
 	};
@@ -29455,7 +29482,7 @@
 /* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29467,7 +29494,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(209);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -29478,19 +29509,49 @@
 	var Property = function (_React$Component) {
 	  _inherits(Property, _React$Component);
 	
-	  function Property() {
+	  function Property(props) {
 	    _classCallCheck(this, Property);
 	
-	    return _possibleConstructorReturn(this, (Property.__proto__ || Object.getPrototypeOf(Property)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Property.__proto__ || Object.getPrototypeOf(Property)).call(this, props));
+	
+	    _this.state = {
+	      adminRoles: "",
+	      clusters: ""
+	    };
+	    _this.deleteProperty = _this.deleteProperty.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Property, [{
-	    key: "componentDidMount",
+	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.props.requestProperty(this.props.params.name);
 	    }
 	  }, {
-	    key: "render",
+	    key: 'updateState',
+	    value: function updateState(property) {
+	      var _this2 = this;
+	
+	      return function (e) {
+	        return _this2.setState(_defineProperty({}, property, e.target.value));
+	      };
+	    }
+	  }, {
+	    key: 'updateProperty',
+	    value: function updateProperty() {}
+	  }, {
+	    key: 'deleteProperty',
+	    value: function deleteProperty() {
+	      var name = this.props.params.name;
+	      this.props.deleteProperty(name);
+	      _reactRouter.hashHistory.push({
+	        pathname: '/properties/',
+	        query: {},
+	        state: {}
+	      });
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      var property = this.props.property;
 	
@@ -29500,8 +29561,8 @@
 	        var adminRoles = property.adminRoles.map(function (adminRole) {
 	          i++;
 	          return _react2.default.createElement(
-	            "li",
-	            { className: "admin-role", key: i },
+	            'li',
+	            { className: 'admin-role', key: i },
 	            adminRole
 	          );
 	        });
@@ -29511,73 +29572,131 @@
 	        j++;
 	        var allowedClusters = property.allowedClusters.map(function (cluster) {
 	          return _react2.default.createElement(
-	            "li",
-	            { className: "admin-role", key: j },
+	            'li',
+	            { className: 'admin-role', key: j },
 	            cluster
 	          );
 	        });
 	      }
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "property-detail animated bounceInRight" },
+	        'div',
+	        { className: 'property-detail animated bounceInRight' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "property-header" },
+	          'div',
+	          { className: 'property-header' },
 	          _react2.default.createElement(
-	            "h1",
+	            'h1',
 	            null,
-	            "Property Summary"
+	            'Property Summary'
 	          )
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "property-details-list group" },
+	          'div',
+	          { className: 'property-details-list group' },
 	          _react2.default.createElement(
-	            "ul",
+	            'ul',
 	            null,
 	            _react2.default.createElement(
-	              "ul",
-	              { className: "property-detail-element group" },
+	              'ul',
+	              { className: 'property-detail-element group' },
 	              _react2.default.createElement(
-	                "li",
+	                'li',
 	                null,
-	                "Name"
+	                'Name'
 	              ),
 	              _react2.default.createElement(
-	                "li",
+	                'li',
 	                null,
 	                this.props.params.name
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "ul",
-	              { className: "property-detail-element group" },
+	              'ul',
+	              { className: 'property-detail-element group' },
 	              _react2.default.createElement(
-	                "li",
+	                'li',
 	                null,
-	                "Admin Roles:"
+	                'Admin Roles:'
 	              ),
 	              _react2.default.createElement(
-	                "ul",
+	                'ul',
 	                null,
 	                adminRoles
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "ul",
-	              { className: "property-detail-element group" },
+	              'ul',
+	              { className: 'property-detail-element group' },
 	              _react2.default.createElement(
-	                "li",
+	                'li',
 	                null,
-	                "Active Clusters:"
+	                'Active Clusters:'
 	              ),
 	              _react2.default.createElement(
-	                "ul",
+	                'ul',
 	                null,
 	                allowedClusters
 	              )
 	            )
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'create-container' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Update Property'
+	          ),
+	          _react2.default.createElement(
+	            'form',
+	            { className: 'create-form', onSubmit: this.updateProperty() },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'create-form-row group' },
+	              _react2.default.createElement(
+	                'label',
+	                null,
+	                'Admin Roles'
+	              ),
+	              _react2.default.createElement('input', {
+	                className: 'input-text',
+	                ref: 'property name',
+	                value: this.state.adminRoles,
+	                placeholder: 'admin-update-1',
+	                onChange: this.updateState('adminRoles') })
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'create-form-row group' },
+	              _react2.default.createElement(
+	                'label',
+	                null,
+	                'Active Clusters'
+	              ),
+	              _react2.default.createElement('input', {
+	                className: 'input-text',
+	                ref: 'property name',
+	                value: this.state.clusters,
+	                placeholder: 'cl1, cl2',
+	                onChange: this.updateState('clusters') })
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'submit',
+	                className: 'create-button' },
+	              'Update Property'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit',
+	            className: 'delete-button',
+	            onClick: this.deleteProperty },
+	          'Delete Property'
 	        )
 	      );
 	    }
