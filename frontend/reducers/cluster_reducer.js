@@ -9,7 +9,6 @@ const ClusterReducer = (state = {}, action) => {
     default:
       return state;
   }
-
 };
 
 export default ClusterReducer;

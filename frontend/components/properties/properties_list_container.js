@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { allProperties } from '../../reducers/selector';
-import { requestProperties } from '../../actions/properties_actions';
+import { requestProperties,
+         createProperty } from '../../actions/properties_actions';
 import PropertyList from './property_list';
 
 const mapStateToProps = (state) => ({
@@ -8,7 +9,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  requestProperties: () => dispatch(requestProperties())
+  requestProperties: () => dispatch(requestProperties()),
+  createProperty: (data, callback) => dispatch(createProperty(data, callback))
 });
 
 export default connect(

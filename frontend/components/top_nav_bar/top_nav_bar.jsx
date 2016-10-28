@@ -11,7 +11,7 @@ class TopNavBar extends React.Component {
 
         <ul className="nav-links">
           <li>
-            <Link to={"/property"}>
+            <Link to={"/properties"}>
               Property
             </Link>
           </li>

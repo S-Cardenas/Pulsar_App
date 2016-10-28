@@ -82,12 +82,13 @@ img {
 }
 
 .clusters-list {
+  float: left;
   margin-top: 20px;
-  width: 95%;
+  width: 50%;
   min-height: 250px;
   border: 3px solid #696969;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 20px;
+  margin-right: 50px;
   border-radius: 5px;
   background: white;
   font-family: "Comic Sans MS", cursive, sans-serif;
@@ -132,17 +133,22 @@ img {
     color: #1E90FF;
 }
 
+.cluster-item-name:hover {
+    color: #2d1152;
+}
+
 .cluster-item ul {
   margin-left: 15px;
 }
 
 .cluster-detail {
+  float: left;
   margin-top: 20px;
-  width: 95%;
+  width: 40%;
   min-height: 250px;
   border: 3px solid #696969;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: 20px;
   border-radius: 5px;
   background: white;
   font-family: "Comic Sans MS", cursive, sans-serif;
@@ -211,6 +217,100 @@ img {
 }
 
 .create-cluster-button:hover {
+  color: #1E90FF;
+  cursor: pointer;
+}
+
+.properties-list {
+  float: left;
+  margin-top: 20px;
+  width: 50%;
+  min-height: 250px;
+  border: 3px solid #696969;
+  margin-left: 20px;
+  margin-right: 50px;
+  border-radius: 5px;
+  background: white;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.properties-header {
+  font-size: 24px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background: #D3D3D3;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.properties-header h1 {
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.properties-item {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #DCDCDC;
+}
+
+.properties-item-name {
+    color: #1E90FF;
+}
+
+.properties-item-name:hover {
+    color: #2d1152;
+}
+
+.properties-item ul {
+  margin-left: 15px;
+}
+
+.create-properties-container {
+  margin-top: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  background: #D3D3D3;
+  width: 275px;
+  border-radius: 5px;
+}
+
+.create-properties-container h1 {
+  font-size: 14px;
+  font-weight: bold;
+  border-bottom: 3px solid black;
+  margin-bottom: 10px;
+}
+
+.create-properties-container label {
+  margin-right: 15px;
+  font-size: 12px;
+  float: left;
+  min-width: 100px;
+}
+
+.create-properties-container input {
+  background: white;
+  border: 1px solid black;
+  float: left;
+  padding: 3px;
+}
+
+.create-properties-button {
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  background: #2d1152;
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.create-properties-button:hover {
   color: #1E90FF;
   cursor: pointer;
 }

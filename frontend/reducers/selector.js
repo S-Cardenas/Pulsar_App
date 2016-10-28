@@ -9,3 +9,7 @@ export const currentCluster = (state) => {
 export const allProperties = (state) => {
   return state ? state.properties : [];
 };
+
+export const currentProperty = (state) => {
+  return state ? state.property : {};
+};

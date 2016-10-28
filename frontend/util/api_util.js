@@ -35,3 +35,13 @@ export const fetchProperties = (success, error) => {
     error
   });
 };
+
+export const createProperty = (data, success, error) => {
+  $.ajax({
+    method: 'PUT',
+    url: 'http://localhost:8080/admin/properties/' + data.propertyName,
+    dataType: JSON,
+    success,
+    error
+  });
+};
