@@ -75,3 +75,13 @@ export const deleteProperty = (data, success, error) => {
     error
   });
 };
+
+export const fetchBrokers = (data, success, error) => {
+  $.ajax({
+    type: 'GET',
+    url: 'http://localhost:8080/admin/brokers/' + data,
+    dataType: 'JSON',
+    success,
+    error
+  });
+};

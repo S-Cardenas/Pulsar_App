@@ -1,6 +1,6 @@
 ##**Pulsar Web App**
 
-A web app for managing <a href='https://github.com/yahoo/pulsar'>Yahoo's Pulsar</a>
+A web app for managing <a href='https://github.com/yahoo/pulsar'>Yahoo's Pulsar</a> built on React.JS/Redux.
 
 ##**Demo Instructions**
 * cd into the root folder.

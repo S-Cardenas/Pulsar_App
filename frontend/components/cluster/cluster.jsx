@@ -1,5 +1,5 @@
 import React from 'react';
-import { hashHistory } from 'react-router';
+import { hashHistory, Link } from 'react-router';
 
 class Cluster extends React.Component {
 
@@ -13,7 +13,7 @@ class Cluster extends React.Component {
   }
 
   componentDidMount() {
-    this.props.requestCluster(this.props.params.name);
+    this.props.requestCluster(this.props.name);
   }
 
   updateState(property) {
@@ -25,13 +25,17 @@ class Cluster extends React.Component {
   }
 
   deleteCluster() {
-    var cluster = this.props.params.name;
+    var cluster = this.props.name;
     this.props.deleteCluster(cluster);
     hashHistory.push({
       pathname: '/clusters/',
       query: {},
       state: {}
     });
+  }
+
+  viewBrokers() {
+
   }
 
   render() {
@@ -50,7 +54,7 @@ class Cluster extends React.Component {
 
             <ul className="cluster-detail-element group">
               <li>Name</li>
-              <li>{this.props.params.name}</li>
+              <li>{this.props.name}</li>
             </ul>
 
             <ul className="cluster-detail-element group">
@@ -106,6 +110,14 @@ class Cluster extends React.Component {
                 onClick={this.deleteCluster}>
                 Delete Cluster
         </button>
+
+        <Link to={"/clusters/" + this.props.name + '/brokers' }>
+          <button type="submit"
+                  className="delete-button">
+                  View Brokers
+          </button>
+        </Link>
+
 
       </div>
     );

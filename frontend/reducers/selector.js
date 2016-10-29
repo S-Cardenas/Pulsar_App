@@ -13,3 +13,7 @@ export const allProperties = (state) => {
 export const currentProperty = (state) => {
   return state ? state.property : {};
 };
+
+export const allBrokers = (state) => {
+  return state ? state.brokers : [];
+};

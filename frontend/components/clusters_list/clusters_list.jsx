@@ -96,7 +96,6 @@ class ClustersList extends React.Component {
                 onChange={this.update('serviceUrl')}/>
             </div>
 
-
             <br/>
 
             <div className="create-form-row group">
@@ -108,7 +107,6 @@ class ClustersList extends React.Component {
                 placeholder="http://serviceUrlTls"
                 onChange={this.update('serviceUrlTls')}/>
             </div>
-
 
             <br/>
 
