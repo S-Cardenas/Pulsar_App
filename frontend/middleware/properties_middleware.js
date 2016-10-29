@@ -16,8 +16,8 @@ export default ( { getState, dispatch }) => next => action => {
   const propertySuccess = (data) => dispatch(receiveProperty(data));
   const createSuccess = (data) => { action.callback(data);
                                     return dispatch(requestProperties());};
+  const deleteSuccess = (e) => dispatch(requestProperties());
   const error = (e) => console.log(e);
-  const success = (e) => dispatch(requestProperties());
 
   switch(action.type) {
     case REQUEST_PROPERTIES:
@@ -30,7 +30,7 @@ export default ( { getState, dispatch }) => next => action => {
       createProperty(action.data, createSuccess, error);
       break;
     case DELETE_PROPERTY:
-      deleteProperty(action.data, success, error);
+      deleteProperty(action.data, deleteSuccess, error);
       break;
     default:
       next(action);

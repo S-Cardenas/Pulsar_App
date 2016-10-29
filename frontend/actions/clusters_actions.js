@@ -3,6 +3,7 @@ export const REQUEST_CLUSTERS = 'REQUEST_CLUSTERS';
 export const RECEIVE_CLUSTER = 'RECEIVE_CLUSTER';
 export const REQUEST_CLUSTER = 'REQUEST_CLUSTER';
 export const CREATE_CLUSTER = 'CREATE_CLUSTER';
+export const DELETE_CLUSTER = 'DELETE_CLUSTER';
 
 export const receiveClusters = (clusters) => ({
   type: RECEIVE_CLUSTERS,
@@ -27,4 +28,9 @@ export const createCluster = (data, callback) => ({
   type: CREATE_CLUSTER,
   data,
   callback
+});
+
+export const deleteCluster = ( data ) => ({
+  type: DELETE_CLUSTER,
+  data
 });

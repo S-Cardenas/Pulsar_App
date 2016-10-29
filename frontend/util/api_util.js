@@ -27,6 +27,16 @@ export const createCluster = (data, success, error) => {
   });
 };
 
+export const deleteCluster = (data, success, error) => {
+  $.ajax({
+    method: 'DELETE',
+    url: 'http://localhost:8080/admin/clusters/' + data,
+    dataType: JSON,
+    success,
+    error
+  });
+};
+
 export const fetchProperties = (success, error) => {
   $.ajax({
     type: 'GET',

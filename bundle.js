@@ -22436,6 +22436,7 @@
 	var RECEIVE_CLUSTER = exports.RECEIVE_CLUSTER = 'RECEIVE_CLUSTER';
 	var REQUEST_CLUSTER = exports.REQUEST_CLUSTER = 'REQUEST_CLUSTER';
 	var CREATE_CLUSTER = exports.CREATE_CLUSTER = 'CREATE_CLUSTER';
+	var DELETE_CLUSTER = exports.DELETE_CLUSTER = 'DELETE_CLUSTER';
 	
 	var receiveClusters = exports.receiveClusters = function receiveClusters(clusters) {
 	  return {
@@ -22469,6 +22470,13 @@
 	    type: CREATE_CLUSTER,
 	    data: data,
 	    callback: callback
+	  };
+	};
+	
+	var deleteCluster = exports.deleteCluster = function deleteCluster(data) {
+	  return {
+	    type: DELETE_CLUSTER,
+	    data: data
 	  };
 	};
 
@@ -22672,6 +22680,9 @@
 	        action.callback(data);
 	        return dispatch((0, _clusters_actions.receiveCluster)(data));
 	      };
+	      var deleteSuccess = function deleteSuccess(data) {
+	        return dispatch((0, _clusters_actions.requestClusters)());
+	      };
 	      var error = function error(e) {
 	        return console.log(e);
 	      };
@@ -22685,6 +22696,9 @@
 	          break;
 	        case _clusters_actions.CREATE_CLUSTER:
 	          (0, _api_util.createCluster)(action.data, createSuccess, error);
+	          break;
+	        case _clusters_actions.DELETE_CLUSTER:
+	          (0, _api_util.deleteCluster)(action.data, deleteSuccess, error);
 	          break;
 	        default:
 	          next(action);
@@ -22725,6 +22739,16 @@
 	  $.ajax({
 	    method: 'PUT',
 	    url: 'http://localhost:8080/admin/clusters/' + data.clusterName,
+	    dataType: JSON,
+	    success: success,
+	    error: error
+	  });
+	};
+	
+	var deleteCluster = exports.deleteCluster = function deleteCluster(data, success, error) {
+	  $.ajax({
+	    method: 'DELETE',
+	    url: 'http://localhost:8080/admin/clusters/' + data,
 	    dataType: JSON,
 	    success: success,
 	    error: error
@@ -22799,11 +22823,11 @@
 	        action.callback(data);
 	        return dispatch((0, _properties_actions.requestProperties)());
 	      };
+	      var deleteSuccess = function deleteSuccess(e) {
+	        return dispatch((0, _properties_actions.requestProperties)());
+	      };
 	      var error = function error(e) {
 	        return console.log(e);
-	      };
-	      var success = function success(e) {
-	        return dispatch((0, _properties_actions.requestProperties)());
 	      };
 	
 	      switch (action.type) {
@@ -22817,7 +22841,7 @@
 	          (0, _api_util.createProperty)(action.data, createSuccess, error);
 	          break;
 	        case _properties_actions.DELETE_PROPERTY:
-	          (0, _api_util.deleteProperty)(action.data, success, error);
+	          (0, _api_util.deleteProperty)(action.data, deleteSuccess, error);
 	          break;
 	        default:
 	          next(action);
@@ -29084,6 +29108,9 @@
 	  return {
 	    requestCluster: function requestCluster(data) {
 	      return dispatch((0, _clusters_actions.requestCluster)(data));
+	    },
+	    deleteCluster: function deleteCluster(data) {
+	      return dispatch((0, _clusters_actions.deleteCluster)(data));
 	    }
 	  };
 	};
@@ -29094,7 +29121,7 @@
 /* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29106,7 +29133,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRouter = __webpack_require__(209);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -29117,83 +29148,173 @@
 	var Cluster = function (_React$Component) {
 	  _inherits(Cluster, _React$Component);
 	
-	  function Cluster() {
+	  function Cluster(props) {
 	    _classCallCheck(this, Cluster);
 	
-	    return _possibleConstructorReturn(this, (Cluster.__proto__ || Object.getPrototypeOf(Cluster)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Cluster.__proto__ || Object.getPrototypeOf(Cluster)).call(this, props));
+	
+	    _this.state = {
+	      serviceUrl: "",
+	      serviceUrlTls: ""
+	    };
+	    _this.deleteCluster = _this.deleteCluster.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(Cluster, [{
-	    key: "componentDidMount",
+	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      this.props.requestCluster(this.props.params.name);
 	    }
 	  }, {
-	    key: "render",
+	    key: 'updateState',
+	    value: function updateState(property) {
+	      var _this2 = this;
+	
+	      return function (e) {
+	        return _this2.setState(_defineProperty({}, property, e.target.value));
+	      };
+	    }
+	  }, {
+	    key: 'updateCluster',
+	    value: function updateCluster() {
+	      console.log("Updating a cluster doesn't work yet. Please check back later");
+	    }
+	  }, {
+	    key: 'deleteCluster',
+	    value: function deleteCluster() {
+	      var cluster = this.props.params.name;
+	      this.props.deleteCluster(cluster);
+	      _reactRouter.hashHistory.push({
+	        pathname: '/clusters/',
+	        query: {},
+	        state: {}
+	      });
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      var cluster = this.props.cluster;
 	
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "cluster-detail animated bounceInRight" },
+	        'div',
+	        { className: 'cluster-detail animated bounceInRight' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "clusters-header" },
+	          'div',
+	          { className: 'clusters-header' },
 	          _react2.default.createElement(
-	            "h1",
+	            'h1',
 	            null,
-	            "Cluster Summary"
+	            'Cluster Summary'
 	          )
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "clusters-details-list group" },
+	          'div',
+	          { className: 'clusters-details-list group' },
 	          _react2.default.createElement(
-	            "ul",
+	            'ul',
 	            null,
 	            _react2.default.createElement(
-	              "ul",
-	              { className: "cluster-detail-element group" },
+	              'ul',
+	              { className: 'cluster-detail-element group' },
 	              _react2.default.createElement(
-	                "li",
+	                'li',
 	                null,
-	                "Name"
+	                'Name'
 	              ),
 	              _react2.default.createElement(
-	                "li",
+	                'li',
 	                null,
 	                this.props.params.name
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "ul",
-	              { className: "cluster-detail-element group" },
+	              'ul',
+	              { className: 'cluster-detail-element group' },
 	              _react2.default.createElement(
-	                "li",
+	                'li',
 	                null,
-	                "ServiceURL:"
+	                'ServiceURL:'
 	              ),
 	              _react2.default.createElement(
-	                "li",
+	                'li',
 	                null,
 	                cluster.serviceUrl
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "ul",
-	              { className: "cluster-detail-element group" },
+	              'ul',
+	              { className: 'cluster-detail-element group' },
 	              _react2.default.createElement(
-	                "li",
+	                'li',
 	                null,
-	                "ServiceURLTLS:"
+	                'ServiceURLTLS:'
 	              ),
 	              _react2.default.createElement(
-	                "li",
+	                'li',
 	                null,
 	                cluster.serviceUrlTls
 	              )
 	            )
 	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'update-container' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'Update Cluster'
+	          ),
+	          _react2.default.createElement(
+	            'form',
+	            { className: 'update-form', onSubmit: this.updateCluster },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'update-form-row group' },
+	              _react2.default.createElement(
+	                'label',
+	                null,
+	                'ServiceURL'
+	              ),
+	              _react2.default.createElement('input', {
+	                className: 'input-text',
+	                ref: 'property name',
+	                value: this.state.serviceUrl,
+	                placeholder: 'admin-update-1',
+	                onChange: this.updateState('serviceUrl') })
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'update-form-row group' },
+	              _react2.default.createElement(
+	                'label',
+	                null,
+	                'ServiceURLTLS'
+	              ),
+	              _react2.default.createElement('input', {
+	                className: 'input-text',
+	                ref: 'property name',
+	                value: this.state.serviceUrlTls,
+	                placeholder: 'cl1, cl2',
+	                onChange: this.updateState('serviceUrlTls') })
+	            ),
+	            _react2.default.createElement('br', null),
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'submit',
+	                className: 'update-button' },
+	              'Update Cluster'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'button',
+	          { type: 'submit',
+	            className: 'delete-button',
+	            onClick: this.deleteCluster },
+	          'Delete Cluster'
 	        )
 	      );
 	    }
@@ -29538,7 +29659,9 @@
 	    }
 	  }, {
 	    key: 'updateProperty',
-	    value: function updateProperty() {}
+	    value: function updateProperty() {
+	      console.log("this doesn't work yet.");
+	    }
 	  }, {
 	    key: 'deleteProperty',
 	    value: function deleteProperty() {
@@ -29642,7 +29765,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'create-container' },
+	          { className: 'update-container' },
 	          _react2.default.createElement(
 	            'h1',
 	            null,
@@ -29650,10 +29773,10 @@
 	          ),
 	          _react2.default.createElement(
 	            'form',
-	            { className: 'create-form', onSubmit: this.updateProperty() },
+	            { className: 'update-form', onSubmit: this.updateProperty },
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'create-form-row group' },
+	              { className: 'update-form-row group' },
 	              _react2.default.createElement(
 	                'label',
 	                null,
@@ -29669,7 +29792,7 @@
 	            _react2.default.createElement('br', null),
 	            _react2.default.createElement(
 	              'div',
-	              { className: 'create-form-row group' },
+	              { className: 'update-form-row group' },
 	              _react2.default.createElement(
 	                'label',
 	                null,
@@ -29686,7 +29809,7 @@
 	            _react2.default.createElement(
 	              'button',
 	              { type: 'submit',
-	                className: 'create-button' },
+	                className: 'update-button' },
 	              'Update Property'
 	            )
 	          )

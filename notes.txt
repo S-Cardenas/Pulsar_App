@@ -3,3 +3,5 @@ Suggestions:
 
 Questions:
 1. params for PUT /admin/clusters/{cluster}   ???
+2. update REST API doesn't work yet
+3.

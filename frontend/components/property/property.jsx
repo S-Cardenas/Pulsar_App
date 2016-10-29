@@ -21,7 +21,7 @@ class Property extends React.Component {
   }
 
   updateProperty() {
-
+    console.log("this doesn't work yet.");
   }
 
   deleteProperty() {
@@ -89,10 +89,10 @@ class Property extends React.Component {
           </ul>
         </div>
 
-        <div className="create-container">
+        <div className="update-container">
           <h1>Update Property</h1>
-          <form className="create-form" onSubmit={this.updateProperty()}>
-            <div className="create-form-row group">
+          <form className="update-form" onSubmit={this.updateProperty}>
+            <div className="update-form-row group">
               <label>Admin Roles</label>
               <input
                 className="input-text"
@@ -104,7 +104,7 @@ class Property extends React.Component {
 
             <br/>
 
-            <div className="create-form-row group">
+            <div className="update-form-row group">
               <label>Active Clusters</label>
               <input
                 className="input-text"
@@ -117,7 +117,7 @@ class Property extends React.Component {
             <br/>
 
             <button type="submit"
-                    className="create-button">
+                    className="update-button">
                     Update Property
             </button>
           </form>

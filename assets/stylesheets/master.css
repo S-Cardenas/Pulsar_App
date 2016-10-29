@@ -400,7 +400,7 @@ img {
   cursor: pointer;
 }
 
-.create-container {
+.update-container {
   margin-top: 20px;
   padding: 10px;
   margin-bottom: 20px;
@@ -410,28 +410,28 @@ img {
   border-radius: 5px;
 }
 
-.create-container h1 {
+.update-container h1 {
   font-size: 14px;
   font-weight: bold;
   border-bottom: 3px solid black;
   margin-bottom: 10px;
 }
 
-.create-container label {
+.update-container label {
   margin-right: 15px;
   font-size: 12px;
   float: left;
   min-width: 100px;
 }
 
-.create-container input {
+.update-container input {
   background: white;
   border: 1px solid black;
   float: left;
   padding: 3px;
 }
 
-.create-button {
+.update-button {
   font-weight: bold;
   font-size: 14px;
   color: white;
@@ -443,7 +443,7 @@ img {
   border-radius: 5px;
 }
 
-.create-button:hover {
+.update-button:hover {
   color: #1E90FF;
   cursor: pointer;
 }
