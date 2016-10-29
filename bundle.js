@@ -22678,7 +22678,7 @@
 	      };
 	      var createSuccess = function createSuccess(data) {
 	        action.callback(data);
-	        return dispatch((0, _clusters_actions.receiveCluster)(data));
+	        return dispatch((0, _clusters_actions.requestClusters)(data));
 	      };
 	      var deleteSuccess = function deleteSuccess(data) {
 	        return dispatch((0, _clusters_actions.requestClusters)());
