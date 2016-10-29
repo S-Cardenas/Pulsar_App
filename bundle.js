@@ -30108,13 +30108,13 @@
 	        i++;
 	        return _react2.default.createElement(
 	          'div',
-	          { className: 'cluster-item group', key: i },
+	          { className: 'brokers-item group', key: i },
 	          _react2.default.createElement(
 	            'ul',
 	            null,
 	            _react2.default.createElement(
 	              'li',
-	              { className: 'cluster-item-name' },
+	              { className: 'brokers-item-name' },
 	              _react2.default.createElement(
 	                _reactRouter.Link,
 	                { to: "/" },
@@ -30126,10 +30126,10 @@
 	      });
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'cluster-detail animated bounceInRight' },
+	        { className: 'brokers-detail animated bounceInRight' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'clusters-header' },
+	          { className: 'brokers-header' },
 	          _react2.default.createElement(
 	            'h1',
 	            null,
@@ -30138,7 +30138,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'clusters-content' },
+	          { className: 'brokers-content' },
 	          list
 	        )
 	      );

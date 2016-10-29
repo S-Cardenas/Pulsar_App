@@ -447,3 +447,49 @@ img {
   color: #1E90FF;
   cursor: pointer;
 }
+
+.brokers-detail {
+  float: left;
+  margin-top: 20px;
+  width: 40%;
+  min-height: 250px;
+  border: 3px solid #696969;
+  margin-left: auto;
+  margin-right: 20px;
+  border-radius: 5px;
+  background: white;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+.brokers-header {
+  font-size: 24px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background: #D3D3D3;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.brokers-header h1 {
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.brokers-item {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #DCDCDC;
+}
+
+.brokers-item-name {
+    color: #1E90FF;
+}
+
+.brokers-item-name:hover {
+    color: #2d1152;
+}
+
+.brokers-item ul {
+  margin-left: 15px;
+}

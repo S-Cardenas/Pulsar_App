@@ -13,9 +13,9 @@ class BrokerList extends React.Component {
     var list = brokers.map(broker => {
       i++;
       return(
-        <div className="cluster-item group" key={i}>
+        <div className="brokers-item group" key={i}>
           <ul>
-            <li className="cluster-item-name">
+            <li className="brokers-item-name">
               <Link to={"/"}>
                 {broker}
               </Link>
@@ -25,15 +25,15 @@ class BrokerList extends React.Component {
       );
     });
     return(
-      <div className="cluster-detail animated bounceInRight">
+      <div className="brokers-detail animated bounceInRight">
 
-        <div className="clusters-header">
+        <div className="brokers-header">
           <h1>
             Brokers
           </h1>
         </div>
 
-        <div className="clusters-content">
+        <div className="brokers-content">
           {list}
         </div>
 
