@@ -1,0 +1,35 @@
+.group:after {
+	content: "";
+  display: block;
+  clear: both;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background: #2d1152;
+}
+
+.top-nav-bar {
+  color: white;
+  background: #2d1152;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 18px;
+}
+
+.logo-image {
+  padding-left: 10px;
+  width: 187px;
+  height: 36px;
+  float: left;
+}
+
+.top-nav-bar li {
+  line-height: 36px;
+  float: left;
+  margin-left: 15px;
+}
+
+.nav-links li:hover {
+  color: #1E90FF;
+}

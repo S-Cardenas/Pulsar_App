@@ -1,6 +1,9 @@
 import React from 'react';
 import { hashHistory, Link } from 'react-router';
 
+import masterStyle from '../../style/style';
+import styles from './style';
+
 class TopNavBar extends React.Component {
   render() {
     return (

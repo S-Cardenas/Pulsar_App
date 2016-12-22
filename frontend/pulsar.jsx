@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
 
+//Import Master Style
+// import style from './style/style';
 
 document.addEventListener("DOMContentLoaded", function() {
   const store = configureStore();

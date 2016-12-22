@@ -1,4 +1,4 @@
-html, body, header, nav, main,
+/*html, body, header, nav, main,
  section, article, footer, small {
    display: block;
  }
@@ -43,9 +43,9 @@ img {
   display: block;
   width: 100%;
   height: auto;
-}
+}*/
 
-.group:after {
+/*.group:after {
 	content: "";
   display: block;
   clear: both;
@@ -79,9 +79,9 @@ img {
 
 .nav-links li:hover {
   color: #1E90FF;
-}
+}*/
 
-.clusters-list {
+/*.clusters-list {
   float: left;
   margin-top: 20px;
   width: 50%;
@@ -219,9 +219,9 @@ img {
 .create-cluster-button:hover {
   color: #1E90FF;
   cursor: pointer;
-}
+}*/
 
-.properties-list {
+/*.properties-list {
   float: left;
   margin-top: 20px;
   width: 50%;
@@ -492,4 +492,4 @@ img {
 
 .brokers-item ul {
   margin-left: 15px;
-}
+}*/
